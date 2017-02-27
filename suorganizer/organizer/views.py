@@ -15,6 +15,6 @@ def tag_detail(request, slug):
 def startup_list(request):
     return render(request, 'organizer/startup_list.html', {'startup_list': Startup.objects.all()})
 
-def starup_detail(request,slug):
+def startup_detail(request,slug):
     startup = get_object_or_404(Startup, slug__iexact=slug)
-    return render()
+    return render(request, 'organizer/startup_detail', {'startup':startup})
