@@ -4,10 +4,13 @@ from organizer.models import Startup, Tag
 
 class Post(models.Model):
     title = models.CharField(max_length=63)
-    slug = models.SlugField(max_length=63, unique_for_month='pub_date')
+    slug = models.SlugField(max_length=63,
+        unique_for_month='pub_date')
     text = models.TextField()
-    pub_date = models.DateField('date published', auto_now_add=True)
-    tags = models.ManyToManyField(Tag, related_name='blog_posts')
+    pub_date = models.DateField('date published',
+        auto_now_add=True)
+    tags = models.ManyToManyField(Tag,
+        related_name='blog_posts')
     startups = models.ManyToManyField(Startup, related_name='blog_posts')
 
     def __str__(self):
