@@ -1,6 +1,6 @@
 from django.http.response import HttpResponse
 from django.shortcuts import get_object_or_404
-from djange.template import RequestContext, loader
+from django.template import RequestContext, loader
 
 from .models import Tag
 
