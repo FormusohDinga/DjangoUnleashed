@@ -1,5 +1,3 @@
-from django.template import Context, loader
-from django.http.response import (HttpResponse, Http404)
 from django.shortcuts import (get_object_or_404, render_to_response)
 
 from .models import Tag
