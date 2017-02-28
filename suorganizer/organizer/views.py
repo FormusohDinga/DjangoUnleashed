@@ -1,5 +1,5 @@
 from django.http.response import HttpResponse
-from django.shortcuts import (get_object_or_404 ,redirect,render)
+from django.shortcuts import (get_object_or_404,redirect,render)
 from django.template import RequestContext, loader
 from django.views.generic import View
 
