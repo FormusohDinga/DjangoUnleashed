@@ -29,7 +29,7 @@ class TagCreate(View):
                 self.template_name,
                 {'form': self.form_class()})
 
-    def post(slef,request):
+    def post(self,request):
         bound_form = self.form_class(request.POST)
         if bound_form.is_valid():
             new_tag = bound_form.save()
