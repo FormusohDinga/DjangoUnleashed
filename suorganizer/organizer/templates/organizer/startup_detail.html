@@ -1,24 +1,31 @@
+{% extends parent_template|default:"organizer/base_organizer.html" %}
+
+{% block title %}
+{{ block.super }} - {{ startup.name }}
+{% endblock %}
+
+{% block content %}
 <article>
 
   <h2>{{ startup.name }}</h2>
   <dl>
     <dt>Date Founded</dt>
-      <dd>{{ startup.founded_date| date:"F js, Y" }}</dd>
+      <dd>{{ startup.founded_date|date:"F jS, Y" }}</dd>
     <dt>Website</dt>
-      <dd>{{ startup.website | urlize }}</dd>
+      <dd>{{ startup.website|urlize }}</dd>
     <dt>Contact</dt>
       <dd>{{ startup.contact }}</dd>
 
       <dt>Tag{{ startup.tags.count|pluralize }}</dt>
         {% for tag in startup.tags.all %}
-          <dd><a href="">
+          <dd><a href="{{ tag.get_absolute_url }}">
             {{ tag.name|title }}
           </a></dd>
         {% endfor %}
 
   </dl>
 
-  <p>{{ startup.description |linebreaks }}</p>
+  {{ startup.description|linebreaks }}
 
       {% if startup.newslink_set.all %}
           <section>
@@ -40,7 +47,7 @@
             <ul>
               {% for post in startup.blog_posts.all %}
                 <li>
-                  <a href="">
+                  <a href="{{ post.get_absolute_url }}">
                     {{ post.title|title }}</a>
                 </li>
               {% endfor %}
@@ -49,3 +56,4 @@
       {% endif %}
 
 </article>
+{% endblock %}

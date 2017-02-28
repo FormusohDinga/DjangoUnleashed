@@ -10,7 +10,7 @@
        <article>
          <header>
            <h2>
-             <a href="">
+            <a href="{% url 'blog_post_detail' post.pub_date.year post.pub_date.month post.slug %}">
                {{ post.title|title }}</a>
            </h2>
            <p>
@@ -22,7 +22,7 @@
          </header>
          <p>{{ post.text|truncatewords:20 }}</p>
          <p>
-           <a href="">
+         <a href="{% url 'blog_post_detail' post.pub_date.year post.pub_date.month post.slug %}">
              Read more&hellip;</a>
          </p>
        </article>
