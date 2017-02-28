@@ -20,10 +20,10 @@ def post_detail(request, year, month, slug, parent_template=None):
 
 class PostCreate(View):
     form_class = PostForm
-    template_name = 'blogs/post_form.html'
+    template_name = 'blog/post_form.html'
 
     def get(self, request):
-        return render( request, self.template_name, { 'form': self.form_class })
+        return render( request, self.template_name, { 'form': self.form_class() })
     def post(self, request):
         bound_form = self.form_class(request.POST)
         if bound_form.is_valid():
