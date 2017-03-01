@@ -21,7 +21,6 @@ def post_detail(request, year, month, slug, parent_template=None):
 class PostCreate(View):
     form_class = PostForm
     template_name = 'blog/post_form.html'
-
     def get(self, request):
         return render( request, self.template_name, { 'form': self.form_class() })
     def post(self, request):

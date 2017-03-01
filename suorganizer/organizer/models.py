@@ -45,6 +45,8 @@ class NewsLink(models.Model):
     link = models.URLField(max_length=255)
     tags = models.ManyToManyField(Tag)
     startup = models.ForeignKey(Startup)
+    slug = models.SlugField(max_length=63)
+    unique_together = ('slug', 'startup')
 
     def __str__(self):
         return "{}:{}".format(self.starup, self.title)
@@ -53,3 +55,6 @@ class NewsLink(models.Model):
         verbose_name = 'new article'
         ordering = ['-pub_date']
         get_latest_by = 'pub_date'
+
+    def get_absolute_url(self):
+        return self.startup.get_absolute_url()

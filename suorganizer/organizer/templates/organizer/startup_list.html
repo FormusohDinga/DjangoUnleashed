@@ -6,6 +6,11 @@
 
 {% block content %}
 
+<div>
+  <a href="{% url 'organizer_startup_create' %}">
+    Create New Startup </a>
+</div>
+
 <h2>Startup List</h2>
 <ul>
   {% for startup in startup_list %}
