@@ -1,3 +1,4 @@
+
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
@@ -36,22 +37,6 @@ STARTUPS = [
         "founded_date": date(2012, 7, 4),
         "tags": ["video-games"],
         "website": "http://gamecongress.com/",
-    },
-    {
-        "name": "JamBon Software",
-        "slug": "jambon-software",
-        "contact": "django@jambonsw.com",
-        "description":
-            "JamBon Software is a consulting "
-            "company that specializes in web and "
-            "mobile products. They can carry out "
-            "full end-to-end development of new "
-            "products, or review and advise on "
-            "existing projects. They also offer "
-            "hands-on training in Django.",
-        "founded_date": date(2013, 1, 18),
-        "tags": ["django"],
-        "website": "http://jambonsw.com/",
     },
     {
         "name": "Lightning Rod Consulting",

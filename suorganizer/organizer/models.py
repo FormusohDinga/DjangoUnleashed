@@ -27,7 +27,7 @@ class Startup(models.Model):
     founded_date = models.DateField('date founded')
     contact = models.EmailField()
     website = models.URLField(max_length=255)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
         return self.name
@@ -55,6 +55,7 @@ class NewsLink(models.Model):
         verbose_name = 'new article'
         ordering = ['-pub_date']
         get_latest_by = 'pub_date'
+        unique_together = ('slug', 'startup')
 
     def get_absolute_url(self):
         return self.startup.get_absolute_url()
