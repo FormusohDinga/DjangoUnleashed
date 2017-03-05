@@ -2,15 +2,18 @@ from django.conf.urls import url
 
 from ..views import (
     TagCreate, TagDelete, TagUpdate, tag_detail,
-    tag_list)
+    tag_list, TagList, TagPageList)
 
 urlpatterns = [
     url(r'^$',
-        tag_list,
+        TagList.as_view(),
         name='organizer_tag_list'),
     url(r'^create/$',
         TagCreate.as_view(),
         name='organizer_tag_create'),
+    url(r'^(?P<page_number>\d+)/$',
+        TagPageList.as_view(),
+        name='organizer_tag_page'),
     url(r'^(?P<slug>[\w\-]+)/$',
         tag_detail,
         name='organizer_tag_detail'),

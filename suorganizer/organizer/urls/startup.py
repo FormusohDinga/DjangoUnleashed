@@ -3,11 +3,11 @@ from django.conf.urls import url
 
 from ..views import (
     StartupCreate, StartupDelete, StartupUpdate,
-    startup_detail, startup_list)
+    startup_detail, startup_list, StartupList)
 
 urlpatterns = [
     url(r'^$',
-        startup_list,
+        StartupList.as_view(),
         name='organizer_startup_list'),
     url(r'^create/$',
         StartupCreate.as_view(),
