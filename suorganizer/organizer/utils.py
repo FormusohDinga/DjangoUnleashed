@@ -1,8 +1,13 @@
 from django.shortcuts import (
     get_object_or_404, redirect, render)
 from django.http import HttpResponseRedirect
+from django.views.generic import View
+from django.db.models import Model
+from django.core.exceptions import \
+    ImproperlyConfigured
 
-class ObjectCreateMixin:
+
+class CreateView(View):
     form_class = None
     template_name = ''
 
@@ -70,3 +75,4 @@ class ObjectDeleteMixin:
         obj.delete()
         return HttpResponseRedirect(
             self.success_url)
+

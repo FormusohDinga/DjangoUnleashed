@@ -42,7 +42,6 @@ INSTALLED_APPS = (
     'organizer',
     'blog',
     'contact',
-    'django.contrib.flatpages',
     'django.contrib.sites',
     'core',
 
