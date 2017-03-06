@@ -7,6 +7,9 @@ from organizer.urls import (
     newslink as newslink_urls,
     startup as startup_urls, tag as tag_urls)
 
+from django.contrib.flatpages import \
+    urls as flatpages_urls
+
 from .views import redirect_root
 
 urlpatterns = [
@@ -17,4 +20,5 @@ urlpatterns = [
     url(r'^newslink/', include(newslink_urls)),
     url(r'^startup/', include(startup_urls)),
     url(r'^tag/', include(tag_urls)),
+    url(r'^', include(flatpages_urls)),
 ]
