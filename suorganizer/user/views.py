@@ -23,8 +23,45 @@ from django.views.decorators.debug import \
     sensitive_post_parameters
 from django.views.generic import View
 
-from .forms import UserCreationForm
+from .forms import (UserCreationForm, ResendActivationEmailForm)
 from .utils import MailContextViewMixin
+
+class ResendActivationEmail(
+        MailContextViewMixin, View):
+    form_class = ResendActivationEmailForm
+    success_url = reverse_lazy('dj-auth:login')
+    template_name = 'user/resend_activation.html'
+
+    @method_decorator(csrf_protect)
+    def get(self, request):
+        return TemplateResponse(
+            request,
+            self.template_name,
+            {'form': self.form_class()})
+
+    @method_decorator(csrf_protect)
+    def post(self, request):
+        bound_form = self.form_class(request.POST)
+        if bound_form.is_valid():
+            user = bound_form.save(
+                **self.get_save_kwargs(request))
+            if (user is not None
+                    and not bound_form.mail_sent):
+                errs = (
+                    bound_form.non_field_errors())
+                for err in errs:
+                    error(request, err)
+                if errs:
+                    bound_form.errors.pop(
+                        '__all__')
+                return TemplateResponse(
+                    request,
+                    self.template_name,
+                    {'form': bound_form})
+        success(
+            request,
+            'Activation Email Sent!')
+        return redirect(self.success_url)
 
 class ActivateAccount(View):
     success_url = reverse_lazy('dj-auth:login')
@@ -92,6 +129,7 @@ class CreateAccount(MailContextViewMixin, View):
             request,
             self.template_name,
             {'form': bound_form})
+        return redirect('dj-auth:resend_activation')
 
 
 class DisableAccount(View):
