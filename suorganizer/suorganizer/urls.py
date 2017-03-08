@@ -6,10 +6,10 @@ from contact import urls as contact_urls
 from organizer.urls import (
     newslink as newslink_urls,
     startup as startup_urls, tag as tag_urls)
-
-
+from django.contrib.auth import urls as auth_urls
 from django.views.generic import (
     RedirectView, TemplateView)
+from user import urls as user_urls
 urlpatterns = [
     url(r'^$',
         RedirectView.as_view(
@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^newslink/', include(newslink_urls)),
     url(r'^startup/', include(startup_urls)),
     url(r'^tag/', include(tag_urls)),
+    url(r'^user/', include(user_urls, app_name='user', namespace='dj-auth')),
 ]

@@ -1,8 +1,7 @@
 from django.conf.urls import url
 
 from ..views import (
-    TagCreate, TagDelete, TagDetail, TagList,
-    TagPageList, TagUpdate)
+    TagCreate, TagDelete, TagDetail, TagList, TagUpdate)
 urlpatterns = [
     url(r'^$',
         TagList.as_view(),
@@ -11,7 +10,7 @@ urlpatterns = [
         TagCreate.as_view(),
         name='organizer_tag_create'),
     url(r'^(?P<page_number>\d+)/$',
-        TagPageList.as_view(),
+        TagList.as_view(),
         name='organizer_tag_page'),
     url(r'^(?P<slug>[\w\-]+)/$',
         TagDetail.as_view(),

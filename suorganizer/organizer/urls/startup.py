@@ -3,7 +3,7 @@ from django.conf.urls import url
 
 from ..views import (
     StartupCreate, StartupDelete, StartupUpdate,
-    StartupDetail, startup_list, StartupList)
+    StartupDetail, StartupList)
 
 urlpatterns = [
     url(r'^$',

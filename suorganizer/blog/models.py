@@ -22,6 +22,10 @@ class Post(models.Model):
         verbose_name = 'blog posts'
         ordering = ['-pub_date', 'title']
         get_latest_by = 'pub_date'
+        permissions = (
+            ("view_future_post",
+             "Can view unpublished Post"),
+        )
 
     def get_absolute_url(self):
         return reverse(
@@ -29,7 +33,8 @@ class Post(models.Model):
             kwargs={
                 'year': self.pub_date.year,
                 'month': self.pub_date.month,
-                'slug': self.slug
+                'day': self.pub_date.day,
+                'slug': self.slug,
                 }
             )
     def get_update_url(self):

@@ -3,7 +3,7 @@ from django.views.generic import RedirectView
 
 from .views import (
     PostCreate, PostDelete, PostList, PostUpdate,
-    post_detail, PostArchiveYear)
+    PostDetail, PostArchiveYear)
 
 urlpatterns = [
     url(r'^$',
@@ -17,8 +17,9 @@ urlpatterns = [
         name='blog_post_archive_year'),
     url(r'^(?P<year>\d{4})/'
         r'(?P<month>\d{1,2})/'
+        r'(?P<day>\d{1,2})/'
         r'(?P<slug>[\w\-]+)/$',
-        post_detail,
+        PostDetail.as_view(),
         name='blog_post_detail'),
     url(r'^(?P<year>\d{4})/'
         r'(?P<month>\d{1,2})/'

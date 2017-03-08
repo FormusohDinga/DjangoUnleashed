@@ -2,37 +2,44 @@ from django.shortcuts import (
     get_object_or_404, redirect, render)
 from django.views.decorators.http import \
     require_http_methods
-from django.views.generic import (View, CreateView, ListView, YearArchiveView)
+from django.views.generic import (View, CreateView, ListView, YearArchiveView, DateDetailView)
 
 from .forms import PostForm
 from .models import Post
 
+from user.decorators import require_authenticated_permission
 
 class PostArchiveYear(YearArchiveView):
     model = Post
     date_field = 'pub_date'
     make_object_list = True
 
+@require_authenticated_permission('blog.add_post')
 class PostCreate(CreateView):
     form_class = PostForm
     model = Post
 
-@require_http_methods(['HEAD', 'GET'])
-def post_detail(request, year, month, slug):
-    post = get_object_or_404(
-        Post,
-        pub_date__year=year,
-        pub_date__month=month,
-        slug=slug)
-    return render(
-        request,
-        'blog/post_detail.html',
-        {'post': post})
+class PostDetail(DateDetailView):
+    date_field = 'pub_date'
+    model = Post
+    month_format = '%m'
+
+# def post_detail(request, year, month, slug):
+#     post = get_object_or_404(
+#         Post,
+#         pub_date__year=year,
+#         pub_date__month=month,
+#         slug=slug)
+#     return render(
+#         request,
+#         'blog/post_detail.html',
+#         {'post': post})
 
 
 class PostList(ListView):
     model = Post
 
+@require_authenticated_permission('blog.change_post')
 class PostUpdate(View):
     form_class = PostForm
     model = Post
